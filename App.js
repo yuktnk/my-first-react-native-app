@@ -5,28 +5,32 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0,
+      date: new Date(),
     };
   }
 
-  onPressMinusOne = () => {
-    this.setState({
-      count: this.state.count - 1,
-    });
-  };
+  componentDidMount() {
+    this.timerID = setInterval(() => {
+      this.tick();
+    }, 1000);
+  }
 
-  onPressPlusOne = () => {
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
     this.setState({
-      count: this.state.count + 1,
+      date: new Date(),
     });
-  };
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Button title="-1" onPress={this.onPressMinusOne} />
-        <Text>{this.state.count}</Text>
-        <Button title="+1" onPress={this.onPressPlusOne} />
+        <Text style={styles.text}>現在時刻</Text>
+        <Text style={styles.text}>{this.state.date.toLocaleTimeString()}</Text>
+        <Text style={styles.text2}>がんばれ！！！</Text>
       </View>
     );
   }
@@ -38,5 +42,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  text: {
+    fontSize: 48,
+  },
+  text2: {
+    marginTop: 20,
+    fontSize: 48,
+    color: "red",
   },
 });
