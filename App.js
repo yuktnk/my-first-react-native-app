@@ -9,7 +9,6 @@ export default function App() {
       <Button title="+1" onPress={() => setCount(count + 1)} />
       <Text>{count}</Text>
       <Button title="-1" onPress={() => setCount(count - 1)} />
-      ttt ttt ttt ttt ttt ttt
     </View>
   );
 }
